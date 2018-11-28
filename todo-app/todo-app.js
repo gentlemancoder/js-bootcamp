@@ -25,8 +25,16 @@ const filters = {
 
 const renderTodos = function (todos, filters) {
     
-    const filteredTodos = todos.filter(function (todo) {
+    let filteredTodos = todos.filter(function (todo) {
         return todo.task.toLowerCase().includes(filters.searchText.toLowerCase())
+    })
+
+    filteredTodos = filteredTodos.filter(function (todo){
+        if (filters.hideCompleted){
+            return !todo.done
+        } else {
+            return true
+        }
     })
 
     const incompleteTodos = filteredTodos.filter(function (todo) {
@@ -49,20 +57,13 @@ const renderTodos = function (todos, filters) {
         todosLeftAnnouncment.textContent = `You have ${incompleteTodos.length} todos left todo`
         document.querySelector('#todos').appendChild(todosLeftAnnouncment)
     }
-
-    if(!filters.hideCompleted){
-        filteredTodos.forEach(function (todo){
-            const todoElement = document.createElement('p')
-            todoElement.textContent = todo.task
-            document.querySelector('#todos').appendChild(todoElement)
-        })
-    } else {
-        incompleteTodos.forEach(function (todo){
-        const todoElement = document.createElement('p')
-        todoElement.textContent = todo.task
-        document.querySelector('#todos').appendChild(todoElement)
-        })
-    }
+    
+    filteredTodos.forEach(function (todo){
+    const todoElement = document.createElement('p')
+    todoElement.textContent = todo.task
+    document.querySelector('#todos').appendChild(todoElement)
+    })
+    
 }
 
 renderTodos(todos, filters)
