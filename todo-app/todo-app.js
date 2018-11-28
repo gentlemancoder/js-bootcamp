@@ -30,11 +30,12 @@ const renderTodos = function (todos, filters) {
     })
 
     filteredTodos = filteredTodos.filter(function (todo){
-        if (filters.hideCompleted){
-            return !todo.done
-        } else {
-            return true
-        }
+        return !filters.hideCompleted || todo.done
+        // if (filters.hideCompleted){
+        //     return !todo.done
+        // } else {
+        //     return true
+        // }
     })
 
     const incompleteTodos = filteredTodos.filter(function (todo) {
