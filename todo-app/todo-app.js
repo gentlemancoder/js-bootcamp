@@ -25,17 +25,11 @@ const filters = {
 
 const renderTodos = function (todos, filters) {
     
-    let filteredTodos = todos.filter(function (todo) {
-        return todo.task.toLowerCase().includes(filters.searchText.toLowerCase())
-    })
-
-    filteredTodos = filteredTodos.filter(function (todo){
-        return !filters.hideCompleted || todo.done
-        // if (filters.hideCompleted){
-        //     return !todo.done
-        // } else {
-        //     return true
-        // }
+    const filteredTodos = todos.filter(function (todo) {
+        const searchTextMatch = todo.task.toLowerCase().includes(filters.searchText.toLowerCase())
+        const hideCompletedMatch = !filters.hideCompleted || !todo.done
+        
+        return searchTextMatch && hideCompletedMatch
     })
 
     const incompleteTodos = filteredTodos.filter(function (todo) {
