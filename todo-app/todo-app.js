@@ -1,27 +1,13 @@
-const todos = [{
-    task: 'wake up',
-    done: true
-}, {
-    task: 'get dressed',
-    done: false
-}, {
-    task: 'eat breakfast',
-    done: false
-}, {
-    task: 'go for a walk',
-    done: false
-}, {
-    task: 'go to sleep',
-    done: false
-}]
-
+let todos = []
 
 const filters = {
     searchText: '',
     hideCompleted: false
 }
 
-
+if (localStorage.getItem('todos') !== null){
+    todos = JSON.parse(localStorage.getItem('todos'))
+}
 
 const renderTodos = function (todos, filters) {
     
@@ -75,8 +61,11 @@ document.querySelector('#add-todo').addEventListener('submit', function(e){
     todos.push({
         task :e.target.elements.newTodo.value,
         done: false})
-        renderTodos(todos, filters)
-        e.target.elements.newTodo.value = ''
+        
+    localStorage.setItem('todos', JSON.stringify(todos))
+
+    renderTodos(todos, filters)
+    e.target.elements.newTodo.value = ''
 })
 
  document.querySelector('#hide-completed').addEventListener('change', function(e){
