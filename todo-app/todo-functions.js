@@ -11,6 +11,17 @@ const saveTodos = function (todos) {
     localStorage.setItem('todos', JSON.stringify(todos))
 }
 
+// Removes todos from the array
+const removeTodo = function (id) {
+    const todoIndex = todos.findIndex(function (todo) {
+        return todo.id === id
+    })
+
+    if (todoIndex > -1) {
+        todos.splice(todoIndex, 1)
+    }
+}
+
 // Get the DOM elements for each note
 const generateTodoDOM = function(todo) {
     const todoElement = document.createElement('div')
@@ -29,7 +40,10 @@ const generateTodoDOM = function(todo) {
     // Set up the remove button
     buttonEl.textContent = 'Delete'
     todoElement.appendChild(buttonEl)
-
+    buttonEl.addEventListener('click', function (e) {
+        removeTodo(todo.id)
+        renderTodos(todos, filters)
+    })
     return todoElement
     }
 
