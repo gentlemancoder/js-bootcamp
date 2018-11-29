@@ -31,11 +31,7 @@ const generateTodoDOM = function(todo) {
 
     //Setup checkbox
     checkboxEl.setAttribute('type', 'checkbox')
-    // Andrew's way
     checkboxEl.checked = todo.done
-    // my way
-    // if (todo.done === true)
-    //     checkboxEl.setAttribute("checked", "checked")
     todoElement.appendChild(checkboxEl)
 
     // Set up todo text
