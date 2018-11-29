@@ -11,10 +11,25 @@ const saveTodos = function (todos) {
     localStorage.setItem('todos', JSON.stringify(todos))
 }
 
-
+// Get the DOM elements for each note
 const generateTodoDOM = function(todo) {
-    const todoElement = document.createElement('p')
-    todoElement.textContent = todo.task
+    const todoElement = document.createElement('div')
+    const todoTextEl = document.createElement('span')
+    const checkboxEl = document.createElement('input')
+    const buttonEl = document.createElement('button')
+
+    //Setup checkbox
+    checkboxEl.setAttribute('type', 'checkbox')
+    todoElement.appendChild(checkboxEl)
+
+    // Set up todo text
+    todoTextEl.textContent = todo.task
+    todoElement.appendChild(todoTextEl)
+
+    // Set up the remove button
+    buttonEl.textContent = 'Delete'
+    todoElement.appendChild(buttonEl)
+
     return todoElement
     }
 
