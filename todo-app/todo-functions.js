@@ -31,6 +31,11 @@ const generateTodoDOM = function(todo) {
 
     //Setup checkbox
     checkboxEl.setAttribute('type', 'checkbox')
+    // Andrew's way
+    checkboxEl.checked = todo.done
+    // my way
+    // if (todo.done === true)
+    //     checkboxEl.setAttribute("checked", "checked")
     todoElement.appendChild(checkboxEl)
 
     // Set up todo text
@@ -43,20 +48,15 @@ const generateTodoDOM = function(todo) {
     buttonEl.addEventListener('click', function (e) {
         removeTodo(todo.id)
         renderTodos(todos, filters)
+    
     })
     return todoElement
     }
 
-const generateSummaryDOM = function(){
-    let todosAnnouncement = document.createElement('h2')
-    if(filters.searchText === '' && !filters.hideCompleted){
-        todosAnnouncement.textContent = `You have ${todos.length} things to do.`
-    } else if(filters.searchText !== '' && !filters.hideCompleted) {
-        todosAnnouncement.textContent = `You have ${filteredTodos.length} todos that match this search.`
-    } else if(filters.hideCompleted){
-        todosAnnouncement.textContent = `You have ${incompleteTodos.length} todos left to do.`
-    }
-    return todosAnnouncement
+const generateSummaryDOM = function(incompleteTodos) {
+    const summary = document.createElement('h2')
+    summary.textContent = `You have ${incompleteTodos.length} todos left`
+    return summary
 }
 
 const renderTodos = function (todos, filters) {
@@ -73,7 +73,8 @@ const renderTodos = function (todos, filters) {
     })
     
     document.querySelector('#todos').innerHTML = '';
-    document.querySelector('#todos').appendChild(generateSummaryDOM())
+    document.querySelector('#todos').appendChild(generateSummaryDOM(incompleteTodos))
+    
     filteredTodos.forEach(function (todo) {
         document.querySelector('#todos').appendChild(generateTodoDOM(todo))
     })
