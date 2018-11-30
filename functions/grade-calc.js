@@ -1,4 +1,7 @@
-const gradeCalc = function(grade, max){
+const gradeCalc = (grade, max) => {
+    if (typeof grade !== 'number' || typeof max !== 'number'){  
+        throw Error('Your input was not a number!')
+    }
     const percent = grade / max * 100
     if (percent >= 90) {
         letterGrade = 'A'
@@ -11,13 +14,16 @@ const gradeCalc = function(grade, max){
     } else {
         letterGrade = 'F'
     }
-
-    return `You got a ${letterGrade} (${percent}%)!`
+    return `You got a ${letterGrade} (${percent}%)!`    
 }
 
+try {
+    console.log(gradeCalc(15, 'Fish'))    
+} catch (error) {
+    console.log(error.message);
+    
+}
 
-
-console.log(gradeCalc(15, 20))
 
 console.log(gradeCalc(12, 15))
 
