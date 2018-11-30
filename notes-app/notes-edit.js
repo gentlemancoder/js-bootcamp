@@ -18,7 +18,7 @@ timeElement.textContent = `Last edited ${moment(note.updatedAt).fromNow()}`
 bodyElement.value = note.body
 
 
-titleElement.addEventListener('input', function (e) { 
+titleElement.addEventListener('input',(e) => { 
     note.title = e.target.value
     note.updatedAt = new Date().getTime()
     timeElement.textContent = generateLastEdited(note.updatedAt)
@@ -26,25 +26,23 @@ titleElement.addEventListener('input', function (e) {
 })
 
 
-bodyElement.addEventListener('input', function (e) { 
+bodyElement.addEventListener('input',(e) => { 
     note.body = e.target.value
     note.updatedAt = new Date().getTime()
     timeElement.textContent = generateLastEdited(note.updatedAt)
     saveNotes(notes)
 })
 
-removeButton.addEventListener('click', function(e) {
+removeButton.addEventListener('click',(e) => {
     removeNote(noteId)
     saveNotes(notes)
     location.assign('/index.html')
 })
 
-window.addEventListener('storage', function(e){
+window.addEventListener('storage',(e) =>{
     if (e.key === 'notes'){
         notes = JSON.parse(e.newValue)
-        let note = notes.find(function(note) {
-            return note.id === noteId
-        }) 
+        let note = notes.find((note) => note.id === noteId) 
         
         if (note === undefined) {
             location.assign('/index.html')

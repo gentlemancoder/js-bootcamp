@@ -23,10 +23,8 @@ const removeTodo = function (id) {
 }
 
 // Toggle the todo by id
-const toggleTodo = function (id) {
-    const todo = todos.find(function (todo) {
-        return todo.id === id
-    })
+const toggleTodo = (id) => {
+    const todo = todos.find((todo) => todo.id === id)
     
     if (todo !== undefined) {
         todo.done = !todo.done
@@ -34,7 +32,7 @@ const toggleTodo = function (id) {
 }
 
 // Get the DOM elements for each note
-const generateTodoDOM = function (todo) {
+const generateTodoDOM =  (todo) => {
     const todoElement = document.createElement('div')
     const todoTextEl = document.createElement('span')
     const checkboxEl = document.createElement('input')
@@ -44,7 +42,7 @@ const generateTodoDOM = function (todo) {
     checkboxEl.setAttribute('type', 'checkbox')
     checkboxEl.checked = todo.done
     todoElement.appendChild(checkboxEl)
-    checkboxEl.addEventListener('change', function (e) {
+    checkboxEl.addEventListener('change',(e) => {
         toggleTodo(todo.id)
         saveTodos(todos)
         renderTodos(todos, filters)
@@ -57,7 +55,7 @@ const generateTodoDOM = function (todo) {
     // Set up the remove button
     buttonEl.textContent = 'Delete'
     todoElement.appendChild(buttonEl)
-    buttonEl.addEventListener('click', function (e) {
+    buttonEl.addEventListener('click',(e) => {
         removeTodo(todo.id)
         renderTodos(todos, filters)
 
@@ -65,7 +63,7 @@ const generateTodoDOM = function (todo) {
     return todoElement
 }
 
-const generateSummaryDOM = function (incompleteTodos) {
+const generateSummaryDOM = (incompleteTodos) => {
     const summary = document.createElement('h2')
     summary.textContent = `You have ${incompleteTodos.length} todos left`
     return summary
@@ -73,16 +71,14 @@ const generateSummaryDOM = function (incompleteTodos) {
 
 const renderTodos = function (todos, filters) {
 
-    const filteredTodos = todos.filter(function (todo) {
+    const filteredTodos = todos.filter( (todo) => {
         const searchTextMatch = todo.task.toLowerCase().includes(filters.searchText.toLowerCase())
         const hideCompletedMatch = !filters.hideCompleted || !todo.done
 
         return searchTextMatch && hideCompletedMatch
     })
 
-    const incompleteTodos = filteredTodos.filter(function (todo) {
-        return !todo.done
-    })
+    const incompleteTodos = filteredTodos.filter( (todo) => !todo.done)
 
     document.querySelector('#todos').innerHTML = '';
     document.querySelector('#todos').appendChild(generateSummaryDOM(incompleteTodos))
