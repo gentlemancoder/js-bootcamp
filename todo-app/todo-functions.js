@@ -1,19 +1,13 @@
-const getSavedTodos = function () {
+const getSavedTodos = () => localStorage.getItem('todos' !== null ? JSON.parse(localStorage.getItem('todos')) : [])
 
-    if (localStorage.getItem('todos') !== null) {
-        return JSON.parse(localStorage.getItem('todos'))
-    } else {
-        return []
-    }
-}
 
-const saveTodos = function (todos) {
+const saveTodos = (todos) => {
     localStorage.setItem('todos', JSON.stringify(todos))
 }
 
 // Removes todos from the array
-const removeTodo = function (id) {
-    const todoIndex = todos.findIndex(function (todo) {
+const removeTodo =  (id) => {
+    const todoIndex = todos.findIndex( (todo) => {
         return todo.id === id
     })
 
@@ -69,7 +63,7 @@ const generateSummaryDOM = (incompleteTodos) => {
     return summary
 }
 
-const renderTodos = function (todos, filters) {
+const renderTodos =  (todos, filters) => {
 
     const filteredTodos = todos.filter( (todo) => {
         const searchTextMatch = todo.task.toLowerCase().includes(filters.searchText.toLowerCase())
@@ -83,7 +77,7 @@ const renderTodos = function (todos, filters) {
     document.querySelector('#todos').innerHTML = '';
     document.querySelector('#todos').appendChild(generateSummaryDOM(incompleteTodos))
 
-    filteredTodos.forEach(function (todo) {
+    filteredTodos.forEach((todo) => {
         document.querySelector('#todos').appendChild(generateTodoDOM(todo))
     })
 }
