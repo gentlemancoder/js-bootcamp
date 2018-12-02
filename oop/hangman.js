@@ -7,14 +7,14 @@ const Hangman = function (word, remainingGuesses) {
 
 Hangman.prototype.getPuzzle = function () {
     let puzzle = ''
-    for (let i = 0; i < this.word.length; i++){
-        let isMatch = false
-        for (let j = 0; j < this.lettersGuessed.length; j++) {
-            if (this.word[i] === this.lettersGuessed[j].toLowerCase()) 
-                isMatch = true
-        }
-        puzzle += (isMatch ? this.word[i] : '*')
-    }
+    
+    this.word.forEach(letter => {
+        if (this.lettersGuessed.includes(letter) || letter === ' ')
+            puzzle += letter
+        else
+            puzzle += '*'
+    })
+
     return puzzle
 }
 
