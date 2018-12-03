@@ -26,16 +26,47 @@ class Person {
 
 }
 
-
-const me = new Person('Andrew', 'Mead', 27, ['Teaching', 'Biking'])
-
-me.getBio = function() {
-    return 'This is fake'
+class Employee extends Person {
+    constructor(firstName, lastName, age, position, likes) {
+        super(firstName, lastName, age, likes)
+        this.position = position
+    }
+    getBio() {
+        return `${this.firstName} ${this.lastName} is a ${this.position}.`
+    }
+    getYearsLet() {
+        return 65 - this.age
+    }
 }
-me.setName("Alexis Turner")
-console.log(me.getBio())
+
+class Student extends Person {
+    constructor(firstName, lastName, grade, age, likes = []) {
+        super(firstName, lastName, age, likes)
+        this.grade = grade
+    }
+    
+    getBio() {
+        let isPassing = this.grade >= 70
+        if (isPassing)
+            return `${this.firstName} is passing the course.`
+        else
+            return `${this.firstName} is failing the course.`
+    }
+
+    updateGrade(points) {
+        this.grade += points
+    }
+}
+
+// const me = new Employee('Andrew', 'Mead', 27, 'Teacher', ['Teaching', 'Biking'])
+// console.log(me.getBio())
+// console.log(me.getYearsLet())
+
+const him = new Student('Bill', 'Bryson', 45, 21)
+console.log(him.getBio())
+him.updateGrade(36)
+console.log(him.getBio())
 
 
 const person2 = new Person('Clancy', 'Turner', 54)
-
 console.log(person2.getBio())
