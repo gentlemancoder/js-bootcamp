@@ -8,7 +8,12 @@
 // Booloean: myBool --> Boolean.prototype --> Object.prototype --> null
 
 // Strings numbers and bools are all primitives, but the have object wrappers. i.e. when you call a method on them JS coerces them into objects
+let status ='playing'
+
+
+
 const gameLocation = document.querySelector('#game')
+
 const puzzleEl = document.createElement('div')
 const remainingEl = document.createElement('div')
 
@@ -25,4 +30,5 @@ window.addEventListener('keypress', function (e){
     game1.makeGuess(guess)
     puzzleEl.textContent = game1.getPuzzle()
     remainingEl.textContent = game1.remainingGuesses
+    console.log(game1.calculateStatus())    
 })

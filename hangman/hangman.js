@@ -10,7 +10,7 @@ Hangman.prototype.makeGuess = function (guess) {
         console.log("'Invalid guess")
     }
     
-    guess =guess.toLowerCase()
+    guess = guess.toLowerCase()
     const isUnique = !this.lettersGuessed.includes(guess)
     const isBadGuess = !this.word.includes(guess)
     if (isUnique) {
@@ -35,4 +35,14 @@ Hangman.prototype.getPuzzle = function () {
     return puzzle
 }
 
-
+Hangman.prototype.calculateStatus = function () {
+    if (this.remainingGuesses <= 0) {
+        return 'failed'
+    }
+    if (this.word.forEach(letter => {
+        return this.lettersGuessed.includes(letter)
+    })) 
+        return 'finished'
+    
+    else return 'playing'
+}
