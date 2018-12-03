@@ -8,7 +8,7 @@ gameLocation.appendChild(puzzleEl)
 gameLocation.appendChild(remainingEl)
 gameLocation.appendChild(statusEl)
 
-const game1 = new Hangman('cat', 2)
+const game1 = new Hangman('Car Parts', 2)
 
 puzzleEl.textContent = game1.puzzle
 remainingEl.textContent = game1.remainingGuesses
