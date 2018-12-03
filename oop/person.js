@@ -46,11 +46,7 @@ class Student extends Person {
     }
     
     getBio() {
-        let isPassing = this.grade >= 70
-        if (isPassing)
-            return `${this.firstName} is passing the course.`
-        else
-            return `${this.firstName} is failing the course.`
+        return this.grade >= 70 ? `${this.firstName} is passing the course.` : `${this.firstName} is failing the course.`
     }
 
     updateGrade(points) {
