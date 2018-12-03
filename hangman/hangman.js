@@ -23,25 +23,20 @@ Hangman.prototype.getStatus = function () {
     if (this.status === 'playing') {
         return `Guesses left: ${this.remainingGuesses}`
     } else if (this.status === 'failed'){
-        let theWord = this.word.join('')
-        return `Nice Try! The word was ${theWord}`
+        return `Nice Try! The word was "${this.word.join('')}"`
     } else {
         return 'Great work! You guessed the word!'
     }
 }
 Hangman.prototype.makeGuess = function (guess) {
+    guess = guess.toLowerCase()
+    const isUnique = !this.lettersGuessed.includes(guess)
+    const isBadGuess = !this.word.includes(guess)
     
     if (this.status !== 'playing') {
         return
     }
     
-    if(guess.length > 1){
-        console.log("'Invalid guess")
-    }
-    
-    guess = guess.toLowerCase()
-    const isUnique = !this.lettersGuessed.includes(guess)
-    const isBadGuess = !this.word.includes(guess)
     if (isUnique) {
         this.lettersGuessed.push(guess)
     }
