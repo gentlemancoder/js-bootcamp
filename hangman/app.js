@@ -1,17 +1,3 @@
-// Primitive values: string, number, boolean, null, undefined
-
-// Object: myObject --> Object.prototype --> null
-// Array: myArray --> Array.prototype --> Object.prototype
-// Function: myFunction --> Function.prototype --> Object.prototype --> null
-// String : myString --> String.prototype --> Object.prototype --> null
-// Number: myNumber --> Number.prototype --> Object.prototype --> null
-// Booloean: myBool --> Boolean.prototype --> Object.prototype --> null
-
-// Strings numbers and bools are all primitives, but the have object wrappers. i.e. when you call a method on them JS coerces them into objects
-let status ='playing'
-
-
-
 const gameLocation = document.querySelector('#game')
 
 const puzzleEl = document.createElement('div')
@@ -30,5 +16,4 @@ window.addEventListener('keypress', function (e){
     game1.makeGuess(guess)
     puzzleEl.textContent = game1.getPuzzle()
     remainingEl.textContent = game1.remainingGuesses
-    console.log(game1.calculateStatus())    
 })
