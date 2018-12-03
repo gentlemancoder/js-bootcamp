@@ -21,19 +21,25 @@ window.addEventListener('keypress', (e) => {
     statusEl.textContent = game1.statusMessage
 })
 
-// getPuzzle((error, puzzle) => {
-//     if (error) {
-//         console.log(`Error: ${error}`)
-//     } else{
-//         console.log(puzzle)
-//     }
-// })
+getPuzzle(9, (error, puzzle) => {
+    if (error) {
+        console.log(`Error: ${error}`)
+    } else{
+        console.log(puzzle)
+    }
+})
 
-const puzzle = getPuzzleSync()
-console.log(puzzle)
-console.log('Do something else')
-// Making an HTTP request
-// const countryCode = "AF" 
+
+
+getCountry("US", (error, country) => {
+    if (error) {
+        console.log(`Error: ${error}`)
+    } else{
+        console.log(`Country Name: ${country.name}`)
+    }
+})
+
+
 // const countryRequest = new XMLHttpRequest()
 
 // countryRequest.addEventListener('readystatechange', (e) => {
