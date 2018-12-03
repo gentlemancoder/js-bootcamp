@@ -21,14 +21,17 @@ window.addEventListener('keypress', (e) => {
     statusEl.textContent = game1.statusMessage
 })
 
-getPuzzle((error, puzzle) => {
-    if (error) {
-        console.log(`Error: ${error}`)
-    } else{
-        console.log(puzzle)
-    }
-})
+// getPuzzle((error, puzzle) => {
+//     if (error) {
+//         console.log(`Error: ${error}`)
+//     } else{
+//         console.log(puzzle)
+//     }
+// })
 
+const puzzle = getPuzzleSync()
+console.log(puzzle)
+console.log('Do something else')
 // Making an HTTP request
 // const countryCode = "AF" 
 // const countryRequest = new XMLHttpRequest()
