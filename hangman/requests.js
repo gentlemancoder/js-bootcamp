@@ -13,14 +13,12 @@ const getPuzzle = (wordCount) => {
 
 
 
-const getCountry = (countryCode) => new Promise((resolve, reject) => {
+const getCountry = (countryCode) => {
     return fetch('http://restcountries.eu/rest/v2/all').then((response) => {
         if (response.status === 200) {
-            const data = JSON.parse(response.responseText);
-            const myCountry = data.find((e) => e.alpha2Code === countryCode)
-            resolve(myCountry)
-        } else if (e.target.readyState === 4) {
-            reject('An error has taken place');
+            return response.json()
+        } else{
+            throw new Error('Unable to fetch data');
         }
-    })
-})
+        }).then((data) => data.find((e) => e.alpha2Code === countryCode))
+}
