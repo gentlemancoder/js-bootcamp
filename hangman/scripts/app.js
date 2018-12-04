@@ -26,11 +26,11 @@ document.querySelector('#restart').addEventListener('click', startGame)
 
 startGame()
 
-getPuzzle('8').then((puzzle) => {
-    console.log(puzzle)
-}, (error) => {
-    console.log(`Error: ${error}`)
-})
+// getPuzzle('8').then((puzzle) => {
+//     console.log(puzzle)
+// }, (error) => {
+//     console.log(`Error: ${error}`)
+// })
 
 // getCurrentCountry().then((country) => {
 //     console.log(country.name)
