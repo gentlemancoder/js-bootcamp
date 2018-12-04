@@ -29,14 +29,12 @@ getPuzzle(9).then((puzzle) => {
 
 
 
-getCountry("US", (error, country) => {
-    if (error) {
-        console.log(`Error: ${error}`)
-    } else{
-        console.log(`Country Name: ${country.name}`)
-    }
+getCountry("US").then((country) => {
+    console.log(`Country Name: ${country.name}`)
+}, (error) => {
+    console.log(`Error: ${error}`)
 })
-
+  
 
 // const countryRequest = new XMLHttpRequest()
 
