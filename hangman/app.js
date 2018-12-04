@@ -27,28 +27,6 @@ getPuzzle('8').then((puzzle) => {
     console.log(`Error: ${error}`)
 })
 
-
-
-// getCountry("US").then((country) => {
-//     console.log(`Country Name: ${country.name}`)
-// }).catch( (error) => {
-//     console.log(`Error: ${error}`)
-// })
-
-// getLocation().then((location) => {
-//     console.log(`City: ${location.city}, Region: ${location.region}, Country: ${location.country}`)
-// }).catch( (error) => {
-//     console.log(`Error: ${error}`)
-// })
-
-getLocation().then((location) => {
-    return getCountry(location.country)
-}).then((country) => {
-    console.log(country.name)
-}).catch( (error) => {
-    console.log(`Error: ${error}`)
-})
-
 getCurrentCountry().then((country) => {
     console.log(country.name)
 }).catch((error) => {
