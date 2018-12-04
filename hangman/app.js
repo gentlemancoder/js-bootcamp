@@ -29,11 +29,11 @@ getPuzzle('8').then((puzzle) => {
 
 
 
-// getCountry("US").then((country) => {
-//     console.log(`Country Name: ${country.name}`)
-// }, (error) => {
-//     console.log(`Error: ${error}`)
-// })
+getCountry("US").then((country) => {
+    console.log(`Country Name: ${country.name}`)
+}).catch( (error) => {
+    console.log(`Error: ${error}`)
+})
   
 // fetch('http://puzzle.mead.io/puzzle', {}).then((response) => {
 //     if (response.status === 200){

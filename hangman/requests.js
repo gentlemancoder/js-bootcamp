@@ -14,18 +14,13 @@ const getPuzzle = (wordCount) => {
 
 
 const getCountry = (countryCode) => new Promise((resolve, reject) => {
-    const countryRequest = new XMLHttpRequest()
-
-    countryRequest.addEventListener('readystatechange', (e) => {
-        if (e.target.readyState == 4 && e.target.status === 200) {
-            const data = JSON.parse(e.target.responseText);
+    return fetch('http://restcountries.eu/rest/v2/all').then((response) => {
+        if (response.status === 200) {
+            const data = JSON.parse(response.responseText);
             const myCountry = data.find((e) => e.alpha2Code === countryCode)
             resolve(myCountry)
         } else if (e.target.readyState === 4) {
             reject('An error has taken place');
-        } 
+        }
     })
-    
-    countryRequest.open('GET', 'http://restcountries.eu/rest/v2/all')
-    countryRequest.send()    
 })
