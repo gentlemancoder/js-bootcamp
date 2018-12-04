@@ -1,25 +1,30 @@
 const gameLocation = document.querySelector('#game')
 
-const puzzleEl = document.createElement('div')
-const remainingEl = document.createElement('div')
-const statusEl = document.createElement('div')
+const puzzleEl = document.querySelector('#puzzle')
+const guessesEl = document.querySelector('#status')
 
-gameLocation.appendChild(puzzleEl)
-gameLocation.appendChild(remainingEl)
-gameLocation.appendChild(statusEl)
+let game
 
-const game1 = new Hangman('Car Parts', 2)
-
-puzzleEl.textContent = game1.puzzle
-remainingEl.textContent = game1.remainingGuesses
 
 window.addEventListener('keypress', (e) => {
     const guess = String.fromCharCode(e.charCode)
-    game1.makeGuess(guess)
-    puzzleEl.textContent = game1.puzzle
-    remainingEl.textContent = game1.remainingGuesses
-    statusEl.textContent = game1.statusMessage
+    game.makeGuess(guess)
+    render()
 })
+
+const render = () => {
+    puzzleEl.textContent = game.puzzle
+    guessesEl.textContent = game.statusMessage
+} 
+const startGame = async () => {
+    const puzzle = await getPuzzle(2)
+    game = new Hangman(puzzle, 5)
+    render()
+}
+
+document.querySelector('#restart').addEventListener('click', startGame)
+
+startGame()
 
 getPuzzle('8').then((puzzle) => {
     console.log(puzzle)
@@ -27,8 +32,8 @@ getPuzzle('8').then((puzzle) => {
     console.log(`Error: ${error}`)
 })
 
-getCurrentCountry().then((country) => {
-    console.log(country.name)
-}).catch((error) => {
-    console.log(error)
-})
+// getCurrentCountry().then((country) => {
+//     console.log(country.name)
+// }).catch((error) => {
+//     console.log(error)
+// })
