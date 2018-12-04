@@ -42,4 +42,9 @@ const getLocation = async () => {
         } else {
             throw new Error('An error occured while fetching your data')
         }
-    } 
+} 
+
+const getCurrentCountry = async () => {
+    const location = await getLocation()
+    return await getCountry(location.country) 
+}
