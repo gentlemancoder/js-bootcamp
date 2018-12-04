@@ -1,7 +1,7 @@
 const gameLocation = document.querySelector('#game')
 
 const puzzleEl = document.querySelector('#puzzle')
-const guessesEl = document.querySelector('#status')
+const guessesEl = document.querySelector('#guesses')
 
 let game
 

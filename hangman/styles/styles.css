@@ -1,3 +1,8 @@
-* {
+#puzzle, button {
     color: red;
 }
+
+/* .warning {
+    color: white;
+    background: red;
+} */
