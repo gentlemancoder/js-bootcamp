@@ -1,15 +1,25 @@
 // Callback
-const getDataCallback = (callback) =>
+const getDataCallback = (num, callback) =>
 setTimeout(() => {
-    callback('This is an error', undefined)
-    callback('This is an error', undefined)
+    if (typeof num == 'number') {
+        callback(undefined, num * 2)
+    } else {
+        callback('Number must be provided')
+    }
 }, 2000)
 
-getDataCallback((err, data) => {
+// Callback hell -- deep nesting
+getDataCallback(2, (err, data) => {
     if (err) {
         console.log(err);
     } else {
-        console.log(data)
+        getDataCallback(data, (err, data) => {
+            if (err) {
+                console.log('Error')
+            } else{
+                console.log(data)
+            }
+        })
     }
 })
 
