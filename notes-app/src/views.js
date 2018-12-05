@@ -1,6 +1,6 @@
 import { moment } from "moment"
 import { getFilters } from "./filters";
-import { sortNotes } from "./notes";
+import { sortNotes, getNotes } from "./notes";
 
 // Generate the DOM structure for a note
 const generateNoteDOM = (note) => {
@@ -31,8 +31,8 @@ const generateNoteDOM = (note) => {
 
 // Render application notes
 const renderNotes = () => {
-    const notesEl =document.querySelector('#notes')
-    const filters =getFilters()
+    const notesEl = document.querySelector('#notes')
+    const filters = getFilters()
     const notes = sortNotes(filters.sortBy)
     const filteredNotes = notes.filter( (note) => note.title.toLowerCase().includes(filters.searchText.toLowerCase()))
 
@@ -51,7 +51,23 @@ const renderNotes = () => {
     }
 }
 
+const initializeEditPage = (noteId) => {
+    const titleElement = document.querySelector('#note-title')
+    const timeElement = document.querySelector('#timestamp')
+    const bodyElement = document.querySelector('#note-body')
+    const notes = getNotes()
+    const note = notes.find((note) => note.id === noteId) 
+    
+    if (!note) {
+        location.assign('/index.html')
+    }
+    
+    titleElement.value = note.title
+    timeElement.textContent = `Last edited ${moment(note.updatedAt).fromNow()}`
+    bodyElement.value = note.body    
+}
+
 // Generate the last edited message
 const generateLastEdited = (timestamp) => `Last edited ${moment(timestamp).fromNow()}`
 
-export {generateNoteDOM, renderNotes, generateLastEdited}
+export {generateNoteDOM, renderNotes, generateLastEdited, initializeEditPage}
