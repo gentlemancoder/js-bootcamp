@@ -17,11 +17,12 @@ document.querySelector('#search-todos').addEventListener('input',(e) => {
 
 document.querySelector('#add-todo').addEventListener('submit',(e) =>{
     e.preventDefault()
-    todos.push({
-        id: uuidv4(),
-        task :e.target.elements.newTodo.value,
-        done: false})
-     
+    if(e.target.elements.newTodo.value.trim().length > 0){
+        todos.push({
+            id: uuidv4(),
+            task :e.target.elements.newTodo.value.trim(),
+            done: false})
+    }
     saveTodos(todos)
     renderTodos(todos, filters)
     e.target.elements.newTodo.value = ''
