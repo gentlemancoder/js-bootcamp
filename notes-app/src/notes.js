@@ -85,7 +85,7 @@ const sortNotes = (notes, sortBy) => {
         return notes
 }
 
-const upadateNote = (id, updates) => {
+const updateNote = (id, updates) => {
     const note = notes.find((note) => note.id === id)
     
     if(!note){
@@ -104,6 +104,6 @@ const upadateNote = (id, updates) => {
 
     saveNotes()
 }
-notes = loadNotes
+notes = loadNotes()
 
-export { getNotes, createNote, removeNote, sortNotes, upadateNote }
+export { getNotes, createNote, removeNote, sortNotes, updateNote }
