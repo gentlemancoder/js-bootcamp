@@ -1,17 +1,19 @@
 // Set up filters default object
-let filters = {
+const filters = {
     searchText: '',
     hideCompleted: false
 }
 
 const getFilters = () => filters
 
-const setFilters =  (searchText,  hideCompleted) => {
-    filters = {
-        searchText,
-        hideCompleted
+const setFilters = (updates) => {
+    if (typeof updates.searchText === 'string') {
+        filters.searchText = updates.searchText
+    }
+    if (typeof updates.hideCompleted === 'boolean') {
+        filters.hideCompleted = updates.hideCompleted
     }
 }
 
-export { getFilters, setFilters}
+export { getFilters, setFilters }
 // Make sure to set up the exports

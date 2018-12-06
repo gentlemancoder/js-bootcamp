@@ -1,59 +1,56 @@
+import { getTodos, toggleTodo, saveTodos, removeTodo } from "./todos";
 import { getFilters } from "./filters";
-import { getTodos } from "./todos";
 
-getTodos()
-const renderTodos =  () => {
-    getFilters()
-    const filteredTodos = todos.filter( (todo) => {
+const renderTodos = () => {
+    const todoEl = document.querySelector('#todos')    
+    const filters = getFilters()
+    const filteredTodos = getTodos().filter((todo) => {
         const searchTextMatch = todo.task.toLowerCase().includes(filters.searchText.toLowerCase())
         const hideCompletedMatch = !filters.hideCompleted || !todo.done
 
         return searchTextMatch && hideCompletedMatch
     })
-
-    const incompleteTodos = filteredTodos.filter( (todo) => !todo.done)
+    const incompleteTodos = filteredTodos.filter((todo) => !todo.done)
     
-    const todoEl = document.querySelector('#todos')
-    todoEl.innerHTML = '';
+    todoEl.innerHTML = ''
     todoEl.appendChild(generateSummaryDOM(incompleteTodos))
     
-    if(incompleteTodos.length >= 1){
+    if (filteredTodos.length > 0) {
         filteredTodos.forEach((todo) => {
             todoEl.appendChild(generateTodoDOM(todo))
         })
     } else {
         const emptyMessage = document.createElement('p')
+        emptyMessage.classList.add('empty-message')
         emptyMessage.textContent = 'Nothing to do!'
         todoEl.appendChild(emptyMessage)
     }
 }
 
-
-const generateTodoDOM =  (todo) => {
+const generateTodoDOM = (todo) => {
     const todoElement = document.createElement('label')
-    const containerlEl = document.createElement('container');
-    const todoTextEl = document.createElement('span')
+    const containerEl = document.createElement('div')
     const checkboxEl = document.createElement('input')
+    const todoTextEl = document.createElement('span')
     const buttonEl = document.createElement('button')
 
     //Setup checkbox
     checkboxEl.setAttribute('type', 'checkbox')
     checkboxEl.checked = todo.done
-    containerlEl.appendChild(checkboxEl)
-    checkboxEl.addEventListener('change',(e) => {
+    containerEl.appendChild(checkboxEl)
+    checkboxEl.addEventListener('change', (e) => {
         toggleTodo(todo.id)
-        saveTodos()
         renderTodos()
     })
 
     // Set up todo text
     todoTextEl.textContent = todo.task
-    containerlEl.appendChild(todoTextEl)
+    containerEl.appendChild(todoTextEl)
 
     // Setup container
     todoElement.classList.add('list-item')
-    containerlEl.classList.add('list-item__container')
-    todoElement.appendChild(containerlEl)
+    containerEl.classList.add('list-item__container')
+    todoElement.appendChild(containerEl)
 
     // Set up the remove button
     buttonEl.textContent = 'Delete'

@@ -8,7 +8,7 @@ const loadTodos = () => {
     try {
         todos = todosJSON ? JSON.parse(todosJSON) : []
     } catch (error) {
-        todos =  []
+        todos = []
     }
 }
 
@@ -16,9 +16,9 @@ const saveTodos = () => {
     localStorage.setItem('todos', JSON.stringify(todos))
 }
 
-const getTodos  = () => todos 
+const getTodos = () => todos 
 
-const createTodo =(task) => {
+const createTodo = (task) => {
     if(task.length > 0){
         todos.push({
             id: uuidv4(),
@@ -29,15 +29,13 @@ const createTodo =(task) => {
 
 } 
 
-const removeTodo =  (id) => {
-    const todoIndex = todos.findIndex( (todo) => {
-        return todo.id === id
-    })
+const removeTodo = (id) => {
+    const todoIndex = todos.findIndex((todo) => todo.id === id)
 
     if (todoIndex > -1) {
         todos.splice(todoIndex, 1)
+        saveTodos()
     }
-    saveTodos()
 }
 
 const toggleTodo = (id) => {
@@ -46,8 +44,9 @@ const toggleTodo = (id) => {
     if (todo) {
         todo.done = !todo.done
     }
+    saveTodos()
 }
 
 loadTodos()
 
-export { loadTodos, saveTodos, getTodos, removeTodo, toggleTodo, createTodo }
+export { loadTodos, getTodos, removeTodo, toggleTodo, createTodo }
